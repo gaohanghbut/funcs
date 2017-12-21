@@ -40,7 +40,7 @@ public abstract class BaseSegmentEvaluator implements SegmentEvaluator {
 
     final Executable executable = recompile ? null : codeCache.get(codeSegment);
 
-    final List<SegmentInterceptor> segmentInterceptors = CollectionUtils.isEmpty(this.segmentInterceptors) || interceptor != null ?
+    final List<SegmentInterceptor> segmentInterceptors = CollectionUtils.isNotEmpty(this.segmentInterceptors) || interceptor != null ?
         new SegmentInterceptorList(interceptor) : Collections.emptyList();
 
     if (executable != null) {

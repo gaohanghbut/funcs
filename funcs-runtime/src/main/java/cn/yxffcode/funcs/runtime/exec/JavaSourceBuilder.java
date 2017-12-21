@@ -66,7 +66,7 @@ public abstract class JavaSourceBuilder {
       final String className = CLASS_NAME_PREFIX + CLASS_NAME_NUM.getAndIncrement();
       ctx.put(CLASS_NAME_PARAM, className);
     }
-    if (hasPackage && !ctx.containsKey(PACKAGE_NAME_PARAM)) {
+    if (!hasPackage && !ctx.containsKey(PACKAGE_NAME_PARAM)) {
       ctx.put(PACKAGE_NAME_PARAM, DEFAULT_PACKAGE);
     }
 

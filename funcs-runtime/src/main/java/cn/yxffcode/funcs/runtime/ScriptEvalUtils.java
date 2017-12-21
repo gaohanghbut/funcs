@@ -5,6 +5,7 @@ import cn.yxffcode.funcs.runtime.exec.code.CodeSegment;
 import cn.yxffcode.funcs.runtime.exec.groovy.GroovySegmentEvaluator;
 import cn.yxffcode.funcs.runtime.exec.javac.JavacSegmentEvaluator;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -32,8 +33,16 @@ public final class ScriptEvalUtils {
     return doEval(script, ctx, GROOVY_SEGMENT_EVALUATOR);
   }
 
+  public static <T> T evalGroovy(String script) {
+    return doEval(script, Collections.emptyMap(), GROOVY_SEGMENT_EVALUATOR);
+  }
+
   public static <T> T evalJava(String script, Map<String, Object> ctx) {
     return doEval(script, ctx, JAVAC_SEGMENT_EVALUATOR);
+  }
+
+  public static <T> T evalJava(String script) {
+    return doEval(script, Collections.emptyMap(), JAVAC_SEGMENT_EVALUATOR);
   }
 
   private static <T> T doEval(String script, Map<String, Object> ctx, SegmentEvaluator segmentEvaluator) {

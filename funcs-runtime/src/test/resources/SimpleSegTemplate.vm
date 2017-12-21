@@ -1,0 +1,11 @@
+package $packageName;
+
+import cn.yxffcode.javasegment.core.Executable;
+import java.util.*;
+
+public class $className implements Executable {
+
+    public Object execute(Map<String, Object> context) {
+        $expression
+    }
+}

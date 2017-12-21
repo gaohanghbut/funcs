@@ -3,7 +3,29 @@
 
 ## 使用示例
 
+java示例:
 
+```java
+ScriptEvalUtils.evalJava("return true;");
+```
+
+```java
+Map<String, Object> ctx = Maps.newHashMap();
+ctx.put("i", 10);
+ScriptEvalUtils.evalJava("return i * i;", ctx);
+```
+
+groovy示例:
+
+```java
+ScriptEvalUtils.evalGroovy("return true;");
+```
+
+```java
+Map<String, Object> ctx = Maps.newHashMap();
+ctx.put("i", 10);
+ScriptEvalUtils.evalGroovy("return i * i;", ctx);
+```
 
 ## 底层api使用示例
 将代码模板用vm表示，例如代码模板SimpleSegTemplate.vm:

@@ -46,6 +46,17 @@ public class JavacSegmentEvaluatorTest {
     final Object r1 = evaluator.eval(seg, context);
     System.out.println(r1);
 
+    seg = CodeSegment.fromClassContent(
+        "package $packageName;\n" +
+            "import cn.yxffcode.funcs.runtime.exec.Executable;\n" +
+            "import java.util.*;\n" +
+            "public class JavaTest implements Executable {\n" +
+            "    public Object execute(Map<String, Object> context) {\n" +
+            "        Integer i = 20;\n" +
+            "        return i + i;\n" +
+            "    }\n" +
+            "}");
+
     final Object r2 = evaluator.eval(seg, true, context);
     System.out.println(r2);
   }

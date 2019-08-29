@@ -40,8 +40,7 @@ public abstract class BaseSegmentEvaluator implements SegmentEvaluator {
 
     final Executable executable = recompile ? null : codeCache.get(codeSegment);
 
-    final List<SegmentInterceptor> segmentInterceptors = CollectionUtils.isNotEmpty(this.segmentInterceptors) || interceptor != null ?
-        new SegmentInterceptorList(interceptor) : Collections.emptyList();
+    final List<SegmentInterceptor> segmentInterceptors = getSegmentInterceptors(interceptor);
 
     if (executable != null) {
       LOGGER.debug("invoke executable in cache\n:{}", codeSegment.code());
@@ -68,6 +67,19 @@ public abstract class BaseSegmentEvaluator implements SegmentEvaluator {
     LOGGER.debug("invoke executable after compiled\n:{}", codeSegment.code());
     Object result = codeCache.get(codeSegment).execute(context);
     return invokeGlobalPostEvalResult(result, segmentInterceptors);
+  }
+
+  private List<SegmentInterceptor> getSegmentInterceptors(SegmentInterceptor interceptor) {
+    if (CollectionUtils.isNotEmpty(this.segmentInterceptors) && interceptor != null) {
+      return new SegmentInterceptorList(interceptor);
+    }
+    if (interceptor != null) {
+      return Collections.singletonList(interceptor);
+    }
+    if (CollectionUtils.isNotEmpty(this.segmentInterceptors)) {
+      return this.segmentInterceptors;
+    }
+    return Collections.emptyList();
   }
 
   @Override

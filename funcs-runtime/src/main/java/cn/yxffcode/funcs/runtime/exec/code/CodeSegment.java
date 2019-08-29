@@ -1,7 +1,7 @@
 package cn.yxffcode.funcs.runtime.exec.code;
 
 import cn.yxffcode.funcs.runtime.exec.javac.ReadClassTemplateException;
-import com.google.common.base.Objects;
+import java.util.Objects;
 import com.google.common.io.CharStreams;
 
 import java.io.IOException;
@@ -37,12 +37,12 @@ public abstract class CodeSegment {
     if (o == null || getClass() != o.getClass()) return false;
     CodeSegment that = (CodeSegment) o;
     return needRend == that.needRend &&
-        Objects.equal(code, that.code);
+        Objects.equals(code, that.code);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(code, needRend);
+    return Objects.hash(code, needRend);
   }
 
   /**
@@ -97,6 +97,20 @@ public abstract class CodeSegment {
 
     protected void setClassTemplate(String classTemplate) {
       this.classTemplate = classTemplate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      if (!super.equals(o)) return false;
+      StringClassTemplateCodeSegment that = (StringClassTemplateCodeSegment) o;
+      return Objects.equals(classTemplate, that.classTemplate);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(super.hashCode(), classTemplate);
     }
 
     @Override
